@@ -1,0 +1,81 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Example"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5052",
+      "description": "Development server"
+    },
+    {
+      "url": "https://{username}.gigantic-server.com:{port}/{basePath}",
+      "description": "The production API server",
+      "variables": {
+        "username": {
+          "default": "demo",
+          "description": "this value is assigned by the service provider, in this example `gigantic-server.com`"
+        },
+        "port": {
+          "enum": ["8443", "443"],
+          "default": "8443"
+        },
+        "basePath": {
+          "default": "v2"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/foobar/{id}": {
+      "get": {
+        "tags": ["banana"]
+      }
+    },
+    "/barfoo": {
+      "get": {}
+    }
+  },
+  "components": {
+    "schemas": {
+      "Post": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "example": 10
+          },
+          "title": {
+            "type": "string",
+            "example": "Example Post"
+          },
+          "body": {
+            "type": "string",
+            "example": "This is an example post."
+          },
+          "published": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "none": {},
+      "basic": {
+        "type": "basic",
+        "description": "Use HTTP **Basic** Auth."
+      },
+      "api_key": {
+        "type": "apiKey",
+        "name": "api_key",
+        "in": "query"
+      },
+      "oauth": {
+        "type": "oAuth2",
+        "name": "api_key",
+        "in": "query"
+      }
+    }
+  }
+}
